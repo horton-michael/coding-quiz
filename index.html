@@ -6,13 +6,24 @@
     <title>Coding Quiz</title>
     <link rel="stylesheet" href="style.css" />
   </head>
-  <main>
-    <header class="header">
-      <div id="timer"></div>
-      <div class="highscores"></div>
-    </header>
-  </main>
   <body>
+    <main>
+      <header class="header">
+        <div id="timer"></div>
+        <div id="highscores"></div>
+      </header>
+      <!-- Questions & Answers -->
+      <div id="container">
+        <input id="button" type="button" value="Start" />
+        <h2 id="question">Placeholder (?)</h2>
+        <ul id="answers"></ul>
+      </div>
+    </main>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
     <script src="script.js"></script>
   </body>
 </html>
