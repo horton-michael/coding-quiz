@@ -1,0 +1,12 @@
+.main {
+  display: flex;
+}
+
+#timer {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  color: black;
+  width: 20%;
+  height: 30px;
+}
