@@ -6,22 +6,6 @@ var answersEl = $("#answers");
 var scoreEl = $("#score");
 
 // DATA
-// set of questions
-// questionAnswerObj = {
-//   "Arrays in JavaScript can be used to store ___.": [
-//     "Numbers and strings",
-//     "Other arrays",
-//     "Booleans",
-//     "All of the above",
-//   ],
-//   "Commonly used data types DO NOT include:": [
-//     "Strings",
-//     "Booleans",
-//     "Alerts",
-//     "Numbers",
-//   ],
-// };
-
 // create array of objects storing questions and answers
 var questionAnswerObj = [
   {
@@ -39,13 +23,41 @@ var questionAnswerObj = [
     answers: ["Strings", "Booleans", "Alerts", "Numbers"],
     correctAnswer: "Alerts",
   },
+  {
+    question: "The condition in an if/else statement is enclosed within:",
+    answers: ["Quotes", "Curly brackets", "Parentheses", "Square brackets"],
+    correctAnswer: "Parentheses",
+  },
+  {
+    question: "Arrays in JavaScript can be used to store:",
+    answers: [
+      "Numbers and strings",
+      "Other arrays",
+      "Booleans",
+      "All of the above",
+    ],
+    correctAnswer: "All of the above",
+  },
+  {
+    question:
+      "A very useful tool used during development and debugging for printing content to the debugger is:",
+    answers: ["JavaScript", "Terminal/bash", "For loops", "Console.log"],
+    correctAnswer: "Console.log",
+  },
+  {
+    question:
+      "String values must be enclosed within ___ when being assigned to variables.",
+    answers: ["Commas", "Curly brackets", "Quotes", "Parentheses"],
+    correctAnswer: "Quotes",
+  },
 ];
 
 var score = 0;
 var currentQuestion = 0;
+var timeLeft = 60;
 
+// FUNCTIONS
 function displayQuestion(questionIndex) {
-  // currentQuestion = Object.keys(questionAnswerObj)[questionIndex];
   if (questionIndex < questionAnswerObj.length) {
     var currentQuestionObj = questionAnswerObj[questionIndex]; //change
     questionEl.text(currentQuestionObj.question);
@@ -59,10 +71,10 @@ function displayQuestion(questionIndex) {
         // correct answer
         if (answer === currentQuestionObj.correctAnswer) {
           // scores
-          score++;
+          score += 3;
           scoreEl.text(score);
         } else {
-          // timeLeft -= 10;
+          timeLeft -= 10;
         }
         currentQuestion++;
         displayQuestion(currentQuestion);
@@ -70,29 +82,42 @@ function displayQuestion(questionIndex) {
       answersEl.append(answerButton);
     });
   }
+  if (currentQuestion === questionAnswerObj.length) {
+    endQuiz();
+    timeLeft = 0;
+    timerEl.text("");
+    questionEl.text("Quiz Completed!");
+  }
 }
 
-// FUNCTIONS
 // timer function
 function countdown() {
-  var timeLeft = 60;
   var timeInterval = setInterval(function () {
     if (timeLeft > 1) {
       timeLeft--;
       timerEl.text(`Time: ${timeLeft}`);
     } else if (timeLeft <= 1) {
-      timerEl.text("Time is up!");
       clearInterval(timeInterval);
-      // localStorage.setItem("Quiz Score", score);
+      endQuiz();
+      timerEl.text("");
+      questionEl.text("Time is up!");
     }
   }, 1000);
+  return timeLeft;
+}
+// end quiz function
+function endQuiz() {
+  // hide answers container
+  answersEl.empty();
+  // display score
+  scoreEl.text("Final Score: " + score);
+  // store score in local storage
+  localStorage.setItem("Quiz Score", score);
 }
 
 // USER INTERACTIONS
 startButtonEl.on("click", function () {
   countdown();
-  // questionIndex++;
-  // if (questionIndex < Object.keys(questionAnswerObj).length) {
   startButtonEl.hide();
   displayQuestion(currentQuestion);
 });
