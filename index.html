@@ -4,26 +4,34 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Coding Quiz</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <main>
       <header class="header">
         <div id="timer"></div>
-        <div id="highscores"></div>
+        <div class="mt-3">Score: <span id="score">0</span></div>
       </header>
-      <!-- Questions & Answers -->
-      <div id="container">
-        <input id="button" type="button" value="Start" />
-        <h2 id="question">Placeholder (?)</h2>
-        <ul id="answers"></ul>
+      <div class="container mt-5">
+        <h1>Coding Quiz</h1>
+          <div
+            class="row">
+            <p id="question"></p>
+            <div id="answers" class="col-12"></div>
+          </div>
+        <!-- create Start button -->
+        <button id="start" class="btn btn-primary btn-lg button">Start</button>
+      </div>
+      </div>
       </div>
     </main>
-    <script
-      src="https://code.jquery.com/jquery-3.7.1.min.js"
-      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
